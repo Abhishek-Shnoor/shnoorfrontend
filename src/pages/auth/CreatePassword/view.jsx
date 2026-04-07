@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { AlertCircle, CheckCircle2, ChevronLeft, KeyRound, LockKeyhole, Mail, ShieldCheck } from "lucide-react";
-import brandLogo from "../../../assets/SHnoor_logo_1.jpg";
-import markLogo from "../../../assets/just_logo.jpeg";
+import brandLogo from "../../../assets/shnoor_logo.png";
+import markLogo from "../../../assets/shnoor_logo.png";
 
 const CreatePasswordView = ({
   email,

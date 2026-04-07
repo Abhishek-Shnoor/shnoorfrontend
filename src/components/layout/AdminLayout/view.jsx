@@ -17,7 +17,7 @@ import {
   Video,
   List,
 } from "lucide-react";
-import markLogo from "../../../assets/just_logo.jpeg";
+import markLogo from "../../../assets/shnoor_logo.png";
 import { useNavigate } from "react-router-dom";
 
 const AdminLayoutView = ({

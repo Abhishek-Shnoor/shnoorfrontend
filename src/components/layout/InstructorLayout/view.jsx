@@ -17,7 +17,7 @@ import {
     LogOut,
     UserCircle,
 } from "lucide-react";
-import markLogo from "../../../assets/just_logo.jpeg";
+import markLogo from "../../../assets/shnoor_logo.png";
 
 const InstructorLayoutView = ({
     location,

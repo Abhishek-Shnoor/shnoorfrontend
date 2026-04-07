@@ -5,7 +5,7 @@ import {
     Mail, Phone, MapPin, MessageCircle,
     Twitter, Facebook, Linkedin, Instagram,
 } from 'lucide-react';
-import markLogo from '../../assets/image.png';
+import markLogo from '../../assets/shnoor_logo.png';
 import WhatsAppContactButton from "../../components/WhatsAppButton";
 
 const PrivacyPolicy = () => {

@@ -5,7 +5,7 @@ import {
   Twitter, Facebook, Linkedin, Instagram,
 } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import markLogo from '../../assets/image.png';
+import markLogo from '../../assets/shnoor_logo.png';
 import WhatsAppContactButton from "../../components/WhatsAppButton";
 const ContactView = ({ onBack }) => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
