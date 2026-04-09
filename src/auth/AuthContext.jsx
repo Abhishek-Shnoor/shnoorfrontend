@@ -19,7 +19,7 @@ export function AuthProvider({ children }) {
 
       try {
         if (user) {
-          const token = await user.getIdToken(true);
+          const token = await user.getIdToken();
 
           try {
             const res = await api.post(
@@ -53,15 +53,17 @@ export function AuthProvider({ children }) {
             // AUTO-REGISTER if user not found (404)
             if (error.response?.status === 404) {
               try {
-                // Get selected role from session if it exists (set by Register page)
-                const pendingRole = sessionStorage.getItem("pendingRegistrationRole") || "student";
-                sessionStorage.removeItem("pendingRegistrationRole");
+                  // Get selected role and name from session if it exists (set by Register page)
+                  const pendingRole = sessionStorage.getItem("pendingRegistrationRole") || "student";
+                  sessionStorage.removeItem("pendingRegistrationRole");
 
-                // Register the user in PostgreSQL
-                await api.post("/api/auth/register", {
-                  token,
-                  fullName: user.displayName || user.email.split('@')[0],
-                  role: pendingRole
+                  const pendingFullName = sessionStorage.getItem("pendingRegistrationFullName") || user.displayName || user.email.split('@')[0];
+                  sessionStorage.removeItem("pendingRegistrationFullName");
+
+                  // Register the user in PostgreSQL
+                  await api.post("/api/auth/register", {
+                    token,
+                    fullName: pendingFullName,
                 });
 
                 // Retry login after registration

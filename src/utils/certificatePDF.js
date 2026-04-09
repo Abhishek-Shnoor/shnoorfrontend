@@ -1,6 +1,3 @@
-import html2canvas from "html2canvas";
-import jsPDF from "jspdf";
-
 /**
  * Captures a DOM element and downloads it as a PDF.
  * @param {string} elementId - The ID of the element to capture.
@@ -14,6 +11,12 @@ export const exportToPDF = async (elementId, fileName = "certificate.pdf") => {
     }
 
     try {
+        // Dynamically import heavy PDF dependencies
+        const [{ default: html2canvas }, { default: jsPDF }] = await Promise.all([
+            import("html2canvas"),
+            import("jspdf")
+        ]);
+
         // Foolproof Native PNG Encoder bypassing HTML2Canvas's SVG & CORS processing bugs
         const toPngDataUrl = async (url) => {
             if (!url) return url;

@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import * as tf from '@tensorflow/tfjs';
-import * as faceDetection from '@tensorflow-models/face-detection';
 
 /**
  * useFaceDetection Hook
@@ -43,6 +41,9 @@ export const useFaceDetection = (stream) => {
         const loadModel = async () => {
             try {
                 console.log("[FACE] Loading Face Detection model...");
+                const tf = await import('@tensorflow/tfjs');
+                const faceDetection = await import('@tensorflow-models/face-detection');
+
                 // Ensure WebGL backend for best performance
                 try {
                     await tf.setBackend('webgl');

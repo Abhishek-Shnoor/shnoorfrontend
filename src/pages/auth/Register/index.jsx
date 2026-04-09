@@ -67,20 +67,14 @@ const Register = () => {
     setLoading(true);
 
     try {
-      const userCredential = await createUserWithEmailAndPassword(
-        auth,
-        formData.email,
-        formData.password
-      );
+        sessionStorage.setItem("pendingRegistrationRole", formData.role || "student");
+        sessionStorage.setItem("pendingRegistrationFullName", formData.fullName || "");
 
-      const token = await userCredential.user.getIdToken();
-
-      await api.post("/api/auth/register", {
-        token,
-        fullName: formData.fullName,
-        role: formData.role,
-      });
-
+        const userCredential = await createUserWithEmailAndPassword(
+          auth,
+          formData.email,
+          formData.password
+        );
       setSuccessMessage(
         "Account created successfully. Your account is pending Admin approval."
       );

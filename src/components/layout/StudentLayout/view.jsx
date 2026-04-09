@@ -122,7 +122,7 @@ const StudentLayoutView = ({
         <header style={{
           background: '#fff', borderBottom: '1px solid #e2e8f0', height: '64px', padding: '0 32px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          position: 'sticky', top: 0, zIndex: 30, boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
+          position: 'sticky', top: 0, zIndex: 100, boxShadow: '0 1px 3px rgba(0,0,0,0.04)'
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>
             <button
@@ -165,9 +165,9 @@ const StudentLayoutView = ({
               {notifOpen && (
                 <div style={{
                   position: 'absolute', top: 'calc(100% + 8px)', right: 0,
-                  width: 'min(360px, calc(100vw - 24px))', maxHeight: 'calc(100vh - 96px)',
+                  width: '320px', maxWidth: 'calc(100vw - 32px)', maxHeight: 'calc(100vh - 96px)',
                   background: '#fff', borderRadius: '16px', boxShadow: '0 12px 40px rgba(0,0,0,.12)',
-                  border: '1px solid #e2e8f0', overflow: 'hidden', zIndex: 50,
+                  border: '1px solid #e2e8f0', overflow: 'hidden', zIndex: 110,
                   display: 'flex', flexDirection: 'column'
                 }}>
                   <div style={{ padding: '16px', borderBottom: '1px solid #f1f5f9', background: '#f8fafc', display: 'flex', flexDirection: 'column', gap: '8px' }}>

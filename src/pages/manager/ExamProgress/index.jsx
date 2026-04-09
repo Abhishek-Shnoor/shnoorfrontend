@@ -1,5 +1,4 @@
 import { Fragment, useEffect, useMemo, useState } from "react";
-import jsPDF from "jspdf";
 import { Download, Eye, EyeOff } from "lucide-react";
 import api from "../../../api/axios";
 
@@ -124,7 +123,8 @@ const ExamProgress = () => {
     URL.revokeObjectURL(url);
   };
 
-  const exportToPdf = () => {
+  const exportToPdf = async () => {
+    const { default: jsPDF } = await import("jspdf");
     const doc = new jsPDF({ orientation: "landscape", unit: "pt", format: "a4" });
 
     doc.setFontSize(14);

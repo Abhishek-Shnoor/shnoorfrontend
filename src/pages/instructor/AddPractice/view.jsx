@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useState, Suspense, lazy } from "react";
 import { ArrowLeft, Save, Code, CheckCircle, Trash2, Plus, Upload, Download, FileText } from "lucide-react";
-import Editor from "@monaco-editor/react";
+const Editor = lazy(() => import("@monaco-editor/react"));
 
 const AddPracticeView = ({
   formData,
@@ -162,19 +162,21 @@ const AddPracticeView = ({
                 </span>
               </div>
               <div className="h-64">
-                <Editor
-                  height="100%"
-                  defaultLanguage="javascript"
-                  value={formData.starter_code}
-                  onChange={handleCodeChange}
-                  theme="light"
-                  options={{
-                    minimap: { enabled: false },
-                    fontSize: 14,
-                    lineNumbers: "on",
-                    scrollBeyondLastLine: false,
-                  }}
-                />
+                <Suspense fallback={<div className="h-full flex items-center justify-center text-slate-500 bg-slate-50">Loading Editor...</div>}>
+                  <Editor
+                    height="100%"
+                    defaultLanguage="javascript"
+                    value={formData.starter_code}
+                    onChange={handleCodeChange}
+                    theme="light"
+                    options={{
+                      minimap: { enabled: false },
+                      fontSize: 14,
+                      lineNumbers: "on",
+                      scrollBeyondLastLine: false,
+                    }}
+                  />
+                </Suspense>
               </div>
             </div>
 

@@ -126,8 +126,8 @@ const CodeEditorPanel = ({ question, startCode, language, onLanguageChange, onCo
 export default CodeEditorPanel;*/}
 
 
-import React, { useState, useRef, useEffect } from 'react';
-import Editor from '@monaco-editor/react';
+import React, { useState, useRef, useEffect, Suspense, lazy } from 'react';
+const Editor = lazy(() => import('@monaco-editor/react'));
 import { FaCog, FaExpand, FaPlay, FaPaperPlane, FaCheck, FaTimes } from 'react-icons/fa';
 
 const CodeEditorPanel = ({
@@ -254,21 +254,23 @@ const CodeEditorPanel = ({
 
       {/* Editor */}
       <div className="flex-1 min-h-0">
-        <Editor
-          height="100%"
-          language={language}
-          value={startCode}
-          onChange={onCodeChange}
-          onMount={handleEditorDidMount}
-          theme="vs-dark"
-          options={{
-            minimap: { enabled: false },
-            fontSize: 14,
-            scrollBeyondLastLine: false,
-            automaticLayout: true,
-            fontFamily: "'Fira Code', monospace"
-          }}
-        />
+        <Suspense fallback={<div className="h-full flex items-center justify-center text-slate-500">Loading Editor...</div>}>
+          <Editor
+            height="100%"
+            language={language}
+            value={startCode}
+            onChange={onCodeChange}
+            onMount={handleEditorDidMount}
+            theme="vs-dark"
+            options={{
+              minimap: { enabled: false },
+              fontSize: 14,
+              scrollBeyondLastLine: false,
+              automaticLayout: true,
+              fontFamily: "'Fira Code', monospace"
+            }}
+          />
+        </Suspense>
       </div>
 
       {/* Bottom panel */}
