@@ -1,9 +1,8 @@
 /* eslint-disable no-unused-vars */
-/* eslint-disable no-unused-vars */
-import React, { useEffect, useState, useMemo } from "react";
+import React, { useEffect, useState, useMemo, Suspense, lazy } from "react";
 import { useParams } from "react-router-dom";
 import api from "../../../api/axios";
-import Editor from "@monaco-editor/react";
+const Editor = lazy(() => import("@monaco-editor/react"));
 import { FaPlay, FaCheck, FaTimes } from "react-icons/fa";
 
 // Fisher-Yates shuffle — returns a new shuffled copy
@@ -399,31 +398,33 @@ const ContestDetail = () => {
 
                       {/* Monaco Editor */}
                       <div className="flex-1 min-h-0">
-                        <Editor
-                          height="100%"
-                          language={
-                            lang === "python" ? "python" :
-                              lang === "java" ? "java" :
-                                lang === "c" ? "c" :
-                                  lang === "cpp" ? "cpp" :
-                                    "javascript"
-                          }
-                          value={answers[q.question_id] || ""}
-                          onChange={(v) =>
-                            setAnswers((prev) => ({
-                              ...prev,
-                              [q.question_id]: v || ""
-                            }))
-                          }
-                          theme="vs-dark"
-                          options={{
-                            minimap: { enabled: false },
-                            fontSize: 14,
-                            scrollBeyondLastLine: false,
-                            automaticLayout: true,
-                            fontFamily: "'Fira Code', monospace"
-                          }}
-                        />
+                        <Suspense fallback={<div className="h-full flex items-center justify-center text-slate-500">Loading Editor...</div>}>
+                          <Editor
+                            height="100%"
+                            language={
+                              lang === "python" ? "python" :
+                                lang === "java" ? "java" :
+                                  lang === "c" ? "c" :
+                                    lang === "cpp" ? "cpp" :
+                                      "javascript"
+                            }
+                            value={answers[q.question_id] || ""}
+                            onChange={(v) =>
+                              setAnswers((prev) => ({
+                                ...prev,
+                                [q.question_id]: v || ""
+                              }))
+                            }
+                            theme="vs-dark"
+                            options={{
+                              minimap: { enabled: false },
+                              fontSize: 14,
+                              scrollBeyondLastLine: false,
+                              automaticLayout: true,
+                              fontFamily: "'Fira Code', monospace"
+                            }}
+                          />
+                        </Suspense>
                       </div>
 
                       {/* Bottom Panel — Test Results */}

@@ -214,7 +214,7 @@ const AdminLayoutView = ({
           borderBottom: '1px solid #e2e8f0',
           height: '64px',
           display: 'flex', alignItems: 'center', justifyContent: 'space-between',
-          position: 'sticky', top: 0, zIndex: 30,
+          position: 'sticky', top: 0, zIndex: 100,
           boxShadow: '0 1px 3px rgba(0,0,0,0.04)',
         }}>
           <div style={{ display: 'flex', alignItems: 'center', gap: '16px' }}>

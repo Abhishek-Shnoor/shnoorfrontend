@@ -1,6 +1,4 @@
 import { useState, useEffect, useRef } from 'react';
-import * as tf from '@tensorflow/tfjs';
-import * as cocoSsd from '@tensorflow-models/coco-ssd';
 
 export const useObjectDetection = (stream) => {
     const [model, setModel] = useState(null);
@@ -12,6 +10,34 @@ export const useObjectDetection = (stream) => {
     // Using a ref for the video element to process frames
     const videoRef = useRef(null);
     const requestRef = useRef();
+
+    useEffect(() => {
+        let isMounted = true;
+
+        const loadModel = async () => {
+            try {
+                // Dynamically import heavy ML dependencies
+                const tf = await import('@tensorflow/tfjs');
+                const cocoSsd = await import('@tensorflow-models/coco-ssd');
+
+                await tf.ready();
+                const loadedModel = await cocoSsd.load();
+
+                if (isMounted) {
+                    setModel(loadedModel);
+                }
+            } catch (err) {
+                console.error("Failed to load object detection model", err);
+                if (isMounted) setError(err);
+            }
+        };
+
+        loadModel();
+
+        return () => {
+            isMounted = false;
+        };
+    }, []);
 
     useEffect(() => {
         const video = document.createElement('video');

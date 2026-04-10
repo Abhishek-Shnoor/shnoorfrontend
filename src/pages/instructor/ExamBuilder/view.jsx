@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense, lazy } from 'react';
 import { Save, ArrowRight, ArrowLeft, Trash2, Plus, Code, List, AlertCircle, AlignLeft, Settings, CheckCircle, Clock } from 'lucide-react';
-import Editor from '@monaco-editor/react';
+const Editor = lazy(() => import('@monaco-editor/react'));
 
 const ExamBuilderView = ({
     step, setStep, loading,
@@ -420,21 +420,23 @@ const ExamBuilderView = ({
                                                     </div>
 
                                                     <div className="border border-slate-300 rounded-lg overflow-hidden h-64 shadow-inner">
-                                                        <Editor
-                                                            height="100%"
-                                                            defaultLanguage={q.language || 'javascript'}
-                                                            value={q.starterCode}
-                                                            onChange={(value) => updateQuestion(q.id, 'starterCode', value)}
-                                                            theme="light"
-                                                            options={{
-                                                                minimap: { enabled: false },
-                                                                fontSize: 14,
-                                                                scrollBeyondLastLine: false,
-                                                                lineNumbers: 'on',
-                                                                glyphMargin: false,
-                                                                folding: false,
-                                                            }}
-                                                        />
+                                                        <Suspense fallback={<div className="h-full flex items-center justify-center text-slate-500 bg-slate-50">Loading Editor...</div>}>
+                                                            <Editor
+                                                                height="100%"
+                                                                defaultLanguage={q.language || 'javascript'}
+                                                                value={q.starterCode}
+                                                                onChange={(value) => updateQuestion(q.id, 'starterCode', value)}
+                                                                theme="light"
+                                                                options={{
+                                                                    minimap: { enabled: false },
+                                                                    fontSize: 14,
+                                                                    scrollBeyondLastLine: false,
+                                                                    lineNumbers: 'on',
+                                                                    glyphMargin: false,
+                                                                    folding: false,
+                                                                }}
+                                                            />
+                                                        </Suspense>
                                                     </div>
 
                                                     {/* Test Cases */}

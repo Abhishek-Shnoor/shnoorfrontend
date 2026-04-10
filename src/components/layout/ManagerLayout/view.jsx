@@ -188,7 +188,7 @@ const ManagerLayoutView = ({
             justifyContent: "space-between",
             position: "sticky",
             top: 0,
-            zIndex: 30,
+            zIndex: 100,
             boxShadow: "0 1px 3px rgba(0,0,0,0.04)",
           }}
         >
