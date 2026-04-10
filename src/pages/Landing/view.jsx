@@ -43,13 +43,16 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
   );
 
   const BrandLogo = ({ titleColor = 'text-slate-900', subtitleColor = 'text-slate-500' }) => (
-    <div className="flex items-center">
-      <img
-        src={markLogo}
-        alt="Shnoor International"
-        className="rounded-xl"
-        style={{ width: '60px', height: '62px', objectFit: 'cover', borderRadius: '50%', marginRight: '10px' }}
-      />
+<div className="flex items-center">
+        <img
+          src={markLogo}
+          alt="Shnoor International"
+          width="60"
+          height="62"
+          loading="eager"
+          className="rounded-xl"
+          style={{ width: '60px', height: '62px', objectFit: 'cover', borderRadius: '50%', marginRight: '10px' }}
+        />
       <div>
         <h1 className={`brand-logo ${titleColor} text-xl md:text-2xl font-semibold mb-1 tracking-tight leading-tight`}>
           SHNOOR International
@@ -64,11 +67,11 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
   return (
     <div className="min-h-screen bg-slate-50 font-sans selection:bg-slate-500 selection:text-white overflow-x-hidden">
 
-      {/* --- BACKGROUND BLOBS --- */}
-      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden">
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-slate-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob"></div>
-        <div className="absolute top-0 right-1/4 w-96 h-96 bg-gray-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-2000"></div>
-        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-slate-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20 animate-blob animation-delay-4000"></div>
+      {/* --- BACKGROUND BLOBS (STATIC FOR PERFORMANCE) --- */}
+      <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">
+        <div className="absolute top-0 left-1/4 w-96 h-96 bg-slate-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div className="absolute top-0 right-1/4 w-96 h-96 bg-gray-300 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
+        <div className="absolute -bottom-32 left-1/3 w-96 h-96 bg-slate-400 rounded-full mix-blend-multiply filter blur-3xl opacity-20"></div>
       </div>
 
       {/* --- NAV BAR --- */}
@@ -95,7 +98,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
           </div>
 
           {/* Mobile Menu Toggle */}
-          <button className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)}>
+          <button className="md:hidden text-slate-900" onClick={() => setMobileMenuOpen(!mobileMenuOpen)} aria-label={mobileMenuOpen ? 'Close menu' : 'Open menu'}>
             {mobileMenuOpen ? <X /> : <Menu />}
           </button>
         </div>
@@ -270,7 +273,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
             <div className="absolute bottom-12 -right-4 bg-white p-3 pr-6 rounded-2xl shadow-xl flex items-center gap-3 z-30 animate-[bounce_5s_infinite] border border-slate-100">
               <div className="relative">
                 <div className="w-10 h-10 rounded-full bg-slate-200 overflow-hidden border-2 border-white shadow-sm">
-                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Annie&mouth=smile" alt="Mentor" />
+                  <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Annie&mouth=smile" alt="Mentor" width="40" height="40" loading="lazy" />
                 </div>
                 <div className="absolute -bottom-1 -right-1 bg-green-500 rounded-full p-0.5 border-2 border-white">
                   <CheckCircle2 size={10} className="text-white" />
@@ -287,7 +290,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
       </section>
 
       {/* --- TRAINING OPTIONS GRID (FIXED RATIO) --- */}
-      <section id="training" className="py-20 px-6 relative z-10 bg-white/50 backdrop-blur-sm">
+      <section id="training" className="py-20 px-6 relative z-10 bg-white/50 backdrop-blur-sm" style={{ contentVisibility: 'auto' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">
@@ -303,7 +306,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
               {/* ADJUSTED: Smaller circle (w-32), Larger relative image (w-24) to fill space */}
               <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <img src={instructorIcon} alt="Instructor-Led" className="w-24 h-24 object-contain" />
+                <img src={instructorIcon} alt="Instructor-Led" className="w-24 h-24 object-contain" width="96" height="96" loading="lazy" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Instructor-Led Training</h3>
               <p className="text-slate-500 leading-relaxed text-sm">
@@ -314,7 +317,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
             {/* Card 2: Private Training */}
             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
               <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <img src={privateIcon} alt="Private Training" className="w-24 h-24 object-contain" />
+                <img src={privateIcon} alt="Private Training" className="w-24 h-24 object-contain" width="96" height="96" loading="lazy" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Private Training</h3>
               <p className="text-slate-500 leading-relaxed text-sm">
@@ -325,7 +328,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
             {/* Card 3: Practice Arena */}
             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
               <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <img src={selfPacedIcon} alt="Practice Arena" className="w-24 h-24 object-contain" />
+                <img src={selfPacedIcon} alt="Practice Arena" className="w-24 h-24 object-contain" width="96" height="96" loading="lazy" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Practice Arena</h3>
               <p className="text-slate-500 leading-relaxed text-sm">
@@ -336,7 +339,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
             {/* Card 4: Facilitated Labs */}
             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
               <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <img src={labsIcon} alt="Facilitated Labs" className="w-24 h-24 object-contain" />
+                <img src={labsIcon} alt="Facilitated Labs" className="w-24 h-24 object-contain" width="96" height="96" loading="lazy" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Facilitated Labs</h3>
               <p className="text-slate-500 leading-relaxed text-sm">
@@ -347,7 +350,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
             {/* Card 5: Exam Prep */}
             <div className="w-full md:w-[45%] lg:w-[30%] group p-8 bg-white border border-slate-200 rounded-2xl hover:border-indigo-200 hover:shadow-xl hover:shadow-indigo-900/5 transition-all duration-300 text-center flex flex-col items-center">
               <div className="w-32 h-32 bg-indigo-50 rounded-full flex items-center justify-center mb-6 transform group-hover:scale-110 transition-transform duration-300">
-                <img src={examIcon} alt="Exam Prep" className="w-24 h-24 object-contain" />
+                <img src={examIcon} alt="Exam Prep" className="w-24 h-24 object-contain" width="96" height="96" loading="lazy" />
               </div>
               <h3 className="text-xl font-bold text-slate-900 mb-3">Exam Prep</h3>
               <p className="text-slate-500 leading-relaxed text-sm">
@@ -359,7 +362,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
       </section>
 
       {/* --- CERTIFICATION SECTION --- */}
-      <section id="certification" className="py-20 px-6 bg-slate-100/50">
+      <section id="certification" className="py-20 px-6 bg-slate-100/50" style={{ contentVisibility: 'auto' }}>
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-6">
             Set Yourself Apart with <br /> Industry-Recognized Certifications
@@ -382,6 +385,9 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
               src={nasscomLogo}
               alt="NASSCOM Certified"
               className="w-full h-auto object-contain"
+              width="144"
+              height="144"
+              loading="lazy"
             />
             <div className="absolute -top-2 -right-2 bg-indigo-600 text-white text-[10px] font-bold px-2 py-1 rounded-full uppercase tracking-wider">Milestone</div>
           </div>
@@ -398,7 +404,7 @@ const LandingView = ({ onLogin, onRegister, onContact }) => {
       </section>
 
       {/* --- SUCCESS STORIES --- */}
-      <section id="stories" className="py-24 px-6 relative z-10">
+      <section id="stories" className="py-24 px-6 relative z-10" style={{ contentVisibility: 'auto' }}>
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-black text-slate-900 tracking-tight mb-4">
